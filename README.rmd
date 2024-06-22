@@ -6,7 +6,7 @@ output: md_document
 
 This dataset, found in one of my old external drives, corresponds to the famous
 plot from [*Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve Pulsars*](https://www.proquest.com/docview/302499144/abstract?sourcetype=Dissertations%20&%20Theses) (Craft, 1970).
-This is broadly know as the Joy Division's plot from [*Unknown Pleasures*](https://en.wikipedia.org/wiki/Unknown_Pleasures). If you happen to know whom created the provided CSV file, please let me know so I can give proper credit.
+This is broadly known as the Joy Division's plot from [*Unknown Pleasures*](https://en.wikipedia.org/wiki/Unknown_Pleasures). If you happen to know whom created the provided CSV file, please let me know so I can give proper credit.
 
 The dataset contains "successive pulses from the first pulsar discovered, CP 1919, are here superimposed vertically. The pulses occur every 1.337 seconds. They are caused by rapidly spinning neutron star." (The Cambridge Encyclopaedia of Astronomy, 1977)
 
