@@ -2,6 +2,8 @@
 output: md_document
 ---
 
+[![BuyMeACoffee](https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-yellow.svg)](https://www.buymeacoffee.com/pacha)
+
 # CP 1919 / PSR B1919+21 Dataset
 
 This dataset, found in one of my old external drives, corresponds to the famous
@@ -13,28 +15,50 @@ The dataset contains "successive pulses from the first pulsar discovered, CP 191
 Thanks to [Scientific American](https://www.scientificamerican.com/blog/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/),
 there is a complete explanation of the dataset and its origin.
 
+## Install
+
+From GitHub
+
+```r
+pak::pkg_install("pachadotdev/cp1919")
+```
+
 ## Read
 
 ```{r read}
-pulsar <- readr::read_csv("cp1919.csv")
-
-pulsar
+library(cp1919)
+head(pulsar)
 ```
 
 ## Visualize
 
+### Simple plot
+
+This looks nothing like the Joy Division album cover but it is the starting point.
+
+```{r plot0}
+library(ggplot2)
+
+ggplot(pulsar) +
+    geom_line(
+        aes(x = time, y = radio_intensity)
+    ) +
+    facet_wrap(~measurement)
+```
+
 ### The Cambridge Encyclopaedia of Astronomy (1977)
 
+Now we get a plot with the stacked waves.
+
 ```{r plot1}
-library(ggplot2)
 library(ggridges)
 
 col1 <- "white"
 col2 <- "black"
 
-ggplot(pulsar, aes(x = x, y = y, height = z, group = y)) +
+ggplot(pulsar, aes(x = time, y = measurement, height = radio_intensity, group = measurement)) +
   geom_ridgeline(
-    min_height = min(pulsar$z),
+    min_height = min(pulsar$radio_intensity),
     scale = 0.2,
     linewidth = 0.5,
     fill = col1,
@@ -50,13 +74,15 @@ ggplot(pulsar, aes(x = x, y = y, height = z, group = y)) +
 
 ### The Nature of Pulsars (Scientific American, 1970)
 
+Similar to the previous plot.
+
 ```{r plot2}
 col1 <- "#94cee1"
 col2 <- "white"
 
-ggplot(pulsar, aes(x = x, y = y, height = z, group = y)) +
+ggplot(pulsar, aes(x = time, y = measurement, height = radio_intensity, group = measurement)) +
   geom_ridgeline(
-    min_height = min(pulsar$z),
+    min_height = min(pulsar$radio_intensity),
     scale = 0.2,
     linewidth = 0.5,
     fill = col1,
@@ -72,13 +98,15 @@ ggplot(pulsar, aes(x = x, y = y, height = z, group = y)) +
 
 ### Joy Division's Unknown Pleasures (1979)
 
+Now we get a plot with the stacked waves.
+
 ```{r plot3}
 col1 <- "black"
 col2 <- "white"
 
-ggplot(pulsar, aes(x = x, y = y, height = z, group = y)) +
+ggplot(pulsar, aes(x = time, y = measurement, height = radio_intensity, group = measurement)) +
   geom_ridgeline(
-    min_height = min(pulsar$z),
+    min_height = min(pulsar$radio_intensity),
     scale = 0.2,
     linewidth = 0.5,
     fill = col1,

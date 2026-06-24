@@ -1,0 +1,7 @@
+^\.gitignore$
+^dev$
+^LICENSE\.txt$
+^README\.rmd$
+^README\.md$
+^README_files$
+^README\.html$

@@ -1,5 +1,6 @@
-CP 1919 / PSR B1919+21 Dataset
-==============================
+[![BuyMeACoffee](https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-yellow.svg)](https://www.buymeacoffee.com/pacha)
+
+# CP 1919 / PSR B1919+21 Dataset
 
 This dataset, found in one of my old external drives, corresponds to the
 famous plot from [*Radio Observations of the Pulse Profiles and
@@ -19,50 +20,54 @@ Thanks to [Scientific
 American](https://www.scientificamerican.com/blog/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/),
 there is a complete explanation of the dataset and its origin.
 
-Read
-----
+## Install
 
-    pulsar <- readr::read_csv("cp1919.csv")
+From GitHub
 
-    ## Rows: 24000 Columns: 3
-    ## ── Column specification ────────────────────────────────────────────────────────
-    ## Delimiter: ","
-    ## dbl (3): x, y, z
-    ## 
-    ## ℹ Use `spec()` to retrieve the full column specification for this data.
-    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    pak::pkg_install("pachadotdev/cp1919")
 
-    pulsar
+## Read
 
-    ## # A tibble: 24,000 × 3
-    ##        x     y     z
-    ##    <dbl> <dbl> <dbl>
-    ##  1     1     1 -0.81
-    ##  2     2     1 -0.91
-    ##  3     3     1 -1.09
-    ##  4     4     1 -1   
-    ##  5     5     1 -0.59
-    ##  6     6     1 -0.82
-    ##  7     7     1 -0.43
-    ##  8     8     1 -0.68
-    ##  9     9     1 -0.71
-    ## 10    10     1 -0.27
-    ## # ℹ 23,990 more rows
+    library(cp1919)
+    head(pulsar)
 
-Visualize
----------
+    ##   measurement time radio_intensity
+    ## 1           1    1           -0.81
+    ## 2           1    2           -0.91
+    ## 3           1    3           -1.09
+    ## 4           1    4           -1.00
+    ## 5           1    5           -0.59
+    ## 6           1    6           -0.82
+
+## Visualize
+
+### Simple plot
+
+This looks nothing like the Joy Division album cover but it is the
+starting point.
+
+    library(ggplot2)
+
+    ggplot(pulsar) +
+        geom_line(
+            aes(x = time, y = radio_intensity)
+        ) +
+        facet_wrap(~measurement)
+
+![](README_files/figure-markdown_strict/plot0-1.png)
 
 ### The Cambridge Encyclopaedia of Astronomy (1977)
 
-    library(ggplot2)
+Now we get a plot with the stacked waves.
+
     library(ggridges)
 
     col1 <- "white"
     col2 <- "black"
 
-    ggplot(pulsar, aes(x = x, y = y, height = z, group = y)) +
+    ggplot(pulsar, aes(x = time, y = measurement, height = radio_intensity, group = measurement)) +
       geom_ridgeline(
-        min_height = min(pulsar$z),
+        min_height = min(pulsar$radio_intensity),
         scale = 0.2,
         linewidth = 0.5,
         fill = col1,
@@ -79,12 +84,14 @@ Visualize
 
 ### The Nature of Pulsars (Scientific American, 1970)
 
+Similar to the previous plot.
+
     col1 <- "#94cee1"
     col2 <- "white"
 
-    ggplot(pulsar, aes(x = x, y = y, height = z, group = y)) +
+    ggplot(pulsar, aes(x = time, y = measurement, height = radio_intensity, group = measurement)) +
       geom_ridgeline(
-        min_height = min(pulsar$z),
+        min_height = min(pulsar$radio_intensity),
         scale = 0.2,
         linewidth = 0.5,
         fill = col1,
@@ -101,12 +108,14 @@ Visualize
 
 ### Joy Division’s Unknown Pleasures (1979)
 
+Now we get a plot with the stacked waves.
+
     col1 <- "black"
     col2 <- "white"
 
-    ggplot(pulsar, aes(x = x, y = y, height = z, group = y)) +
+    ggplot(pulsar, aes(x = time, y = measurement, height = radio_intensity, group = measurement)) +
       geom_ridgeline(
-        min_height = min(pulsar$z),
+        min_height = min(pulsar$radio_intensity),
         scale = 0.2,
         linewidth = 0.5,
         fill = col1,

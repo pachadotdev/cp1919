@@ -1,0 +1,20 @@
+Package: cp1919
+Type: Package
+Title: Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve Pulsars
+Description: Successive pulses from CP 1919, the first pulsar discovered. The pulses occur every
+    1.337 seconds. They are caused by rapidly spinning neutron star.
+Version: 0.1
+Authors@R: c(
+    person("Mauricio", "Vargas Sepulveda", , "m.vargas.sepulveda@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-1017-7574"))
+    )
+Suggests: 
+    roxygen2
+Depends: R(>= 4.0.0)
+License: CC0
+BugReports: https://github.com/pachadotdev/cp1919/issues
+URL: https://github.com/pachadotdev/cp1919
+RoxygenNote: 8.0.0
+Encoding: UTF-8
+NeedsCompilation: yes
+LazyData: true
